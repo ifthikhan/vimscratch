@@ -11,8 +11,6 @@ endif
 
 let g:loaded_vimscratch = 1
 let s:default_buffer_name = '__Scratch__'
-let s:buffer_created = 0
-let s:buffer_currently_open = 0
 
 " Create a buffer
 function! CreateScratchBuffer(name)
@@ -23,18 +21,13 @@ endfunction
 
 function! OpenScratchBuffer()
     let name = s:default_buffer_name
-    if s:buffer_created == 0
+    if empty(bufname(name))
         call CreateScratchBuffer(name)
-        let s:buffer_created = 1
     endif
 
-    if s:buffer_currently_open == 0
+    if bufwinnr(name) == -1
         exe "new " . name
-        0 put='Scratch Buffer'
-        put='---------------'
-        exe "normal o\e"
         call MarkCurrentBufferAsScratch()
-        let s:buffer_currently_open = 1
     endif
 endfunction
 
