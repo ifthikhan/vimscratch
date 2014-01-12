@@ -31,7 +31,7 @@ function! OpenScratchBuffer()
     endif
 endfunction
 
-function! MarkCurrentBufferAsScratch()
+function! s:MarkCurrentBufferAsScratch()
     setlocal buftype=nofile
     setlocal bufhidden=hide
     setlocal noswapfile
