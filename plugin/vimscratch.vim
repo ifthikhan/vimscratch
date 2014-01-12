@@ -6,7 +6,7 @@ let s:save_cpo = &cpo
 set cpo&vim
 
 if exists('g:loaded_vimscratch')
-    finish
+    "finish
 endif
 
 let g:loaded_vimscratch = 1
@@ -19,15 +19,24 @@ function! CreateScratchBuffer(name)
     badd `=a:name`
 endfunction
 
-function! OpenScratchBuffer()
+" Opens the scratch buffer. It creates the buffer if not created and loads it.
+" The split position can be controlled by supplying the appropriate split
+" modifiers specified by vim see :h :vert
+function! s:OpenScratchBuffer(split_modifier)
     let name = s:default_buffer_name
     if empty(bufname(name))
         call CreateScratchBuffer(name)
     endif
 
     if bufwinnr(name) == -1
-        exe "new " . name
-        call MarkCurrentBufferAsScratch()
+        if empty(bufname("%")) && !&modified
+            exe 'edit ' . name
+        else
+            " KLUGY: Ideally control the positioning using vim positioning
+            " modifiers eg: :h :vert
+            exe a:split_modifier . ' split ' . name
+        endif
+        call s:MarkCurrentBufferAsScratch()
     endif
 endfunction
 
@@ -36,3 +45,12 @@ function! s:MarkCurrentBufferAsScratch()
     setlocal bufhidden=hide
     setlocal noswapfile
 endfunction
+
+" Command to edit the scratch buffer in the current window or split
+" horizontally
+command! -nargs=0 Scratch call s:OpenScratchBuffer("")
+
+" Command to open the scratch buffer in the current window a vertical split
+" window
+command! -nargs=0 VScratch call s:OpenScratchBuffer("vertical")
+
