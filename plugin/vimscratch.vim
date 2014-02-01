@@ -50,9 +50,14 @@ function! s:MarkCurrentBufferAsScratch()
     setlocal noswapfile
 endfunction
 
-function! s:ShellScratch(...)
+function! s:ExecShellToScratch(...)
     Scratch
     exec 'r ! ' . join(a:000, ' ')
+endfunction
+
+function! s:ExecShellRangeToScratch(from, to)
+    let cur_line = join(getline(a:from, a:to), ' ')
+    exec 'r ! ' . cur_line
 endfunction
 
 " Command to edit the scratch buffer in the current window or split
@@ -64,4 +69,7 @@ command! -nargs=0 Scratch call s:OpenScratchBuffer("")
 command! -nargs=0 VScratch call s:OpenScratchBuffer("vertical")
 
 " Run a shell command and write it to the scratch buffer
-command! -nargs=* EScratch call s:ShellScratch(<f-args>)
+command! -complete=file -nargs=* Sh2Scratch call s:ExecShellToScratch(<f-args>)
+
+" Executes a visually selected text in the buffer
+command! -range VSh2Scratch call s:ExecShellRangeToScratch(<line1>, <line2>)
