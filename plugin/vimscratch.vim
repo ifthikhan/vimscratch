@@ -57,6 +57,7 @@ endfunction
 
 function! s:ExecShellRangeToScratch(from, to)
     let cur_line = join(getline(a:from, a:to), ' ')
+    Scratch
     exec 'r ! ' . cur_line
 endfunction
 
