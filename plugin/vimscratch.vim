@@ -64,4 +64,4 @@ command! -nargs=0 Scratch call s:OpenScratchBuffer("")
 command! -nargs=0 VScratch call s:OpenScratchBuffer("vertical")
 
 " Run a shell command and write it to the scratch buffer
-command! -nargs=* ShScratch call s:ShellScratch(<f-args>)
+command! -nargs=* EScratch call s:ShellScratch(<f-args>)
