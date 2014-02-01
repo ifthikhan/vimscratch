@@ -48,6 +48,8 @@ function! s:MarkCurrentBufferAsScratch()
     setlocal buftype=nofile
     setlocal bufhidden=hide
     setlocal noswapfile
+    setlocal tw=0
+    setlocal colorcolumn=0
 endfunction
 
 function! s:ExecShellToScratch(...)
