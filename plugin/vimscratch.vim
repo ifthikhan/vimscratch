@@ -1,7 +1,7 @@
 "Simple emacs scratch buffer implementation for vim.
 
 if exists('g:loaded_vimscratch')
-    "finish
+    finish
 endif
 
 let s:save_cpo = &cpo
