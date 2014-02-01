@@ -1,13 +1,13 @@
 "Simple emacs scratch buffer implementation for vim.
 
+if exists('g:loaded_vimscratch')
+    "finish
+endif
+
 let s:save_cpo = &cpo
 
 " Let the cpo option to default vim values :h set-option
 set cpo&vim
-
-if exists('g:loaded_vimscratch')
-    "finish
-endif
 
 let g:loaded_vimscratch = 1
 let s:default_buffer_name = '__Scratch__'
@@ -46,6 +46,11 @@ function! s:MarkCurrentBufferAsScratch()
     setlocal noswapfile
 endfunction
 
+function! s:ShellScratch(...)
+    Scratch
+    exec 'r ! ' . join(a:000, ' ')
+endfunction
+
 " Command to edit the scratch buffer in the current window or split
 " horizontally
 command! -nargs=0 Scratch call s:OpenScratchBuffer("")
@@ -54,3 +59,5 @@ command! -nargs=0 Scratch call s:OpenScratchBuffer("")
 " window
 command! -nargs=0 VScratch call s:OpenScratchBuffer("vertical")
 
+" Run a shell command and write it to the scratch buffer
+command! -nargs=* ShScratch call s:ShellScratch(<f-args>)
