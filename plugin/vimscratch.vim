@@ -28,7 +28,8 @@ function! s:OpenScratchBuffer(split_modifier)
         call CreateScratchBuffer(name)
     endif
 
-    if bufwinnr(name) == -1
+    let window_num = bufwinnr(name)
+    if window_num == -1
         if empty(bufname("%")) && !&modified
             exe 'edit ' . name
         else
@@ -37,6 +38,9 @@ function! s:OpenScratchBuffer(split_modifier)
             exe a:split_modifier . ' split ' . name
         endif
         call s:MarkCurrentBufferAsScratch()
+    else
+        " Focus the open window
+        exec window_num . " wincmd w"
     endif
 endfunction
 
