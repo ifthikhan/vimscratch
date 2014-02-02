@@ -76,3 +76,5 @@ command! -complete=file -nargs=* ExecShToScratch call s:ExecShellToScratch(<f-ar
 
 " Executes a visually selected text in the buffer
 command! -range ExecShRangeToScratch call s:ExecShellRangeToScratch(<line1>, <line2>)
+
+nmap <silent> <leader>e :ExecShRangeToScratch<cr>
