@@ -69,10 +69,10 @@ command! -nargs=0 Scratch call s:OpenScratchBuffer("")
 
 " Command to open the scratch buffer in the current window a vertical split
 " window
-command! -nargs=0 VScratch call s:OpenScratchBuffer("vertical")
+command! -nargs=0 ScratchVertical call s:OpenScratchBuffer("vertical")
 
 " Run a shell command and write it to the scratch buffer
-command! -complete=file -nargs=* Sh2Scratch call s:ExecShellToScratch(<f-args>)
+command! -complete=file -nargs=* ExecShToScratch call s:ExecShellToScratch(<f-args>)
 
 " Executes a visually selected text in the buffer
-command! -range VSh2Scratch call s:ExecShellRangeToScratch(<line1>, <line2>)
+command! -range ExecShRangeToScratch call s:ExecShellRangeToScratch(<line1>, <line2>)
