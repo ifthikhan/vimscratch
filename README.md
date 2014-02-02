@@ -1,7 +1,7 @@
 vimscratch
 ==========
 
-Is a bit more than a simple scratch buffer implementation for Vim. In addition to jotting down throw away notes it can be used to execute shell commands. It's as simple as typing the intended command in the scratch buffer and executing the :ExecShRangeToScratch command or <leader>e.
+Is a more than a simple scratch buffer implementation for Vim. In addition to jotting down throw away notes it can be used to execute shell commands. It's as simple as typing the intended command in the scratch buffer and executing the :ExecShRangeToScratch command or <leader>e.
 
 ## Commands
 
